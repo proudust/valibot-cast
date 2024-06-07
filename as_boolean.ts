@@ -1,10 +1,10 @@
 import {
   pipe,
-  SchemaWithPipe,
+  type SchemaWithPipe,
   transform,
-  TransformAction,
+  type TransformAction,
   unknown,
-  UnknownSchema,
+  type UnknownSchema,
 } from "@valibot/valibot";
 
 /**
