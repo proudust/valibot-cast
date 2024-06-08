@@ -8,7 +8,9 @@
       "*_test.ts"
     ]
   },
+  "lock": false,
   "imports": {
-    "@valibot/valibot": "jsr:@valibot/valibot@^0.31.0"
+    "@valibot/valibot": "jsr:@valibot/valibot@^0.31.0",
+    "change-case": "npm:change-case@^5.4.4"
   }
 }
