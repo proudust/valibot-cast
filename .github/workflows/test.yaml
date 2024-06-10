@@ -1,0 +1,27 @@
+name: Test
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Deno Test
+        run: deno test --coverage=coverage
+
+      - name: Write a report using the lcov format from coverage profiles.
+        run: deno coverage ./coverage --lcov > coverage.lcov
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          files: ./coverage.lcov
+          token: ${{ secrets.CODECOV_TOKEN }}
