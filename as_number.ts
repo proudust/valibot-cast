@@ -6,6 +6,9 @@ import {
   type ErrorMessage,
 } from "@valibot/valibot";
 
+/**
+ * Transformation number issue type.
+ */
 export interface AsNumberIssue extends BaseIssue<number> {
   /**
    * The issue kind.
@@ -24,7 +27,7 @@ export interface AsNumberIssue extends BaseIssue<number> {
 }
 
 /**
- * Number schema type.
+ * Transformation number schema type.
  */
 export interface AsNumberSchema<
   TMessage extends ErrorMessage<AsNumberIssue> | undefined,
