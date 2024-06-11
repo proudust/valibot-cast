@@ -2,11 +2,14 @@ import { assertEquals } from "jsr:@std/assert";
 import { safeParse } from "@valibot/valibot";
 import { asNumber } from "./as_number.ts";
 
-interface TestValue {
+type TestValue = {
   input: unknown;
-  success: boolean;
-  output: number | undefined;
-}
+  success: true;
+  output: number;
+} | {
+  input: unknown;
+  success: false;
+};
 
 Deno.test("JavaScript number like value", () => {
   const values = [
@@ -29,7 +32,7 @@ Deno.test("JavaScript number like value", () => {
     { input: "1_000", success: true, output: NaN },
     { input: "1,000", success: true, output: NaN },
     { input: 9007199254740991n, success: true, output: 9007199254740991 },
-    // { input: Symbol.hasInstance, success: false, output: undefined }, // FIXME: throw TypeError
+    { input: Symbol.hasInstance, success: false },
     { input: {}, success: true, output: NaN },
     { input: { [Symbol.toPrimitive]: () => 1 }, success: true, output: 1 },
   ] as const satisfies TestValue[];
@@ -37,6 +40,10 @@ Deno.test("JavaScript number like value", () => {
   for (const expected of values) {
     const { input } = expected;
     const { success, output } = safeParse(asNumber(), expected.input);
-    assertEquals({ input, success, output }, expected);
+    if (expected.success) {
+      assertEquals({ input, success, output }, expected);
+    } else {
+      assertEquals({ input, success }, expected);
+    }
   }
 });
