@@ -17,7 +17,7 @@ Deno.test("JavaScript number like value", () => {
     { input: 0, success: true, output: 0 },
     { input: 1.1, success: true, output: 1.1 },
     { input: -1.1, success: true, output: -1.1 },
-    { input: undefined, success: true, output: NaN },
+    { input: undefined, success: false },
     { input: null, success: true, output: 0 },
     { input: true, success: true, output: 1 },
     { input: false, success: true, output: 0 },
@@ -29,11 +29,11 @@ Deno.test("JavaScript number like value", () => {
     { input: "-Infinity", success: true, output: -Infinity },
     { input: "", success: true, output: 0 },
     { input: "    ", success: true, output: 0 },
-    { input: "1_000", success: true, output: NaN },
-    { input: "1,000", success: true, output: NaN },
+    { input: "1_000", success: false },
+    { input: "1,000", success: false },
     { input: 9007199254740991n, success: true, output: 9007199254740991 },
     { input: Symbol.hasInstance, success: false },
-    { input: {}, success: true, output: NaN },
+    { input: {}, success: false },
     { input: { [Symbol.toPrimitive]: () => 1 }, success: true, output: 1 },
   ] as const satisfies TestValue[];
 

@@ -87,9 +87,16 @@ export function asNumber(message?: ErrorMessage<AsNumberIssue>): AsNumberSchema<
     async: false,
     message,
     _run(dataset, config) {
+      // Symbol: a TypeError is thrown
+      // NaN: not allowed in numeric schema
       if (typeof dataset.value !== "symbol") {
-        dataset.typed = true;
-        dataset.value = Number(dataset.value);
+        const value = Number(dataset.value);
+        if (!Number.isNaN(value)) {
+          dataset.typed = true;
+          dataset.value = value;
+        } else {
+          _addIssue(this, "type", dataset, config);
+        }
       } else {
         _addIssue(this, "type", dataset, config);
       }
