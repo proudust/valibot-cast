@@ -1,0 +1,13 @@
+####
+# Example transform untyped data
+POST http://localhost:8000/
+Content-Type: application/x-www-form-urlencoded
+
+id=123456&agree=1
+
+####
+# Example invalid form data
+POST http://localhost:8000/
+Content-Type: application/x-www-form-urlencoded
+
+id=1a2b3c&agree=n
