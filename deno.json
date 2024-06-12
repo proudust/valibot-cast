@@ -1,11 +1,12 @@
 {
   "name": "@proudust/valibot-cast",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "exports": "./mod.ts",
   "publish": {
     "exclude": [
       ".*",
-      "*_test.ts"
+      "*_test.ts",
+      "examples"
     ]
   },
   "lock": false,
