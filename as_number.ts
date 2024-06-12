@@ -45,7 +45,7 @@ export interface AsNumberSchema<
   /**
    * The expected property.
    */
-  readonly expects: "as_number";
+  readonly expects: "numeric_value";
 
   /**
    * The error message.
@@ -83,7 +83,7 @@ export function asNumber(message?: ErrorMessage<AsNumberIssue>): AsNumberSchema<
     kind: "schema",
     type: "as_number",
     reference: asNumber,
-    expects: "as_number",
+    expects: "numeric_value",
     async: false,
     message,
     _run(dataset, config) {
